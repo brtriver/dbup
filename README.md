@@ -61,6 +61,18 @@ Show status.
 
     php dbup.phar status
 
+
+    % php dbup.phar status                                                                                                                                                                    [/tmp]
+    dbup migration status
+    ================================================================================
+              Applied At | migration sql file
+    --------------------------------------------------------------------------------
+     2013-05-01 22:37:32 | V1__sample_select.sql
+            appending... | V2__sample.sql
+            appending... | V3__sample.sql
+            appending... | V20__sample.sql
+            appending... | V100__sample.sql
+
 Up database after writing a new sql file.
 
     php dbup.phar up

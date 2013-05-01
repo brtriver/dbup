@@ -61,8 +61,6 @@ Show status.
 
     php dbup.phar status
 
-
-    % php dbup.phar status                                                                                                                                                                    [/tmp]
     dbup migration status
     ================================================================================
               Applied At | migration sql file

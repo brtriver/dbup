@@ -19,7 +19,7 @@ simple...simple..simple..
 Requirements
 ------------
 
-Goutte works with PHP 5.4.0 or later.
+Dbup works with PHP 5.4.0 or later.
 
 Install
 --------
@@ -80,6 +80,6 @@ that's all.
 License
 -------
 
-Goutte is licensed under the MIT license.
+Dbup is licensed under the MIT license.
 
 [1]: https://raw.github.com/brtriver/dbup/master/dbup.phar

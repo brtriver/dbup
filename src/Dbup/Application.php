@@ -23,7 +23,7 @@ use Dbup\Exception\RuntimeException;
 class Application extends BaseApplication
 {
     const NAME = 'dbup';
-    const VERSION = '0.1';
+    const VERSION = '0.2';
     /** sql file pattern */
     const PATTERN = '/^V(\d+?)__.*\.sql$/i';
     /** @var null PDO  */
@@ -243,10 +243,11 @@ EOL;
             $dbh = $this->pdo->connection(true);
             $dbh->beginTransaction();
             foreach($queries as $query) {
-                if ($query === '') {
+                $cleanedQuery = trim($query);
+                if ('' === $cleanedQuery) {
                     continue;
                 }
-                $stmt = $dbh->prepare(trim($query));
+                $stmt = $dbh->prepare($cleanedQuery);
                 $stmt->execute();
             }
             $dbh->commit();

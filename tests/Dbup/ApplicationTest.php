@@ -165,4 +165,19 @@ Class ApplicationTest extends \PHPUnit_Framework_TestCase
         $this->app->up($file);
     }
 
+    /**
+     * issue #1
+     */
+    public function testUpWithSingleStatementWithEmptyLineSqlFile()
+    {
+        $this->app->appliedFilesDir = __DIR__ . '/.dbup/applied';
+        $this->app->pdo = $this->pdo;
+        $file = new \SplFileInfo(__DIR__ . '/samples/singleWithEmpty.sql');
+
+        $this->app->up($file);
+
+        \Phake::verify($this->dbh, \Phake::times(1))->prepare(\Phake::anyParameters());
+
+        @unlink(__DIR__ . '/.dbup/applied/single.sql');
+    }
 }

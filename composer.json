@@ -1,5 +1,5 @@
 {
-    "name": "brtriver/ikou",
+    "name": "brtriver/dbup",
     "description": "simple migration tool with PDO",
     "keywords": ["migration", "database"],
     "homepage": "http://1ms.jp/",

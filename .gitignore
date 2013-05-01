@@ -1,0 +1,10 @@
+/vendor/*
+/sql/*
+/.dbup/*
+/.idea/*
+/.DS_Store
+/phpunit.phar
+/composer.phar
+/php-cs-fixer.phar
+/phpunit.xml
+/composer.lock

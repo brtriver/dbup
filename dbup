@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+// bin/dbup
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$application = new \Dbup\Application();
+$application->add(new \Dbup\Command\InitCommand);
+$application->add(new \Dbup\Command\StatusCommand);
+$application->add(new \Dbup\Command\UpCommand);
+$application->add(new \Dbup\Command\CompileCommand);
+$application->run();

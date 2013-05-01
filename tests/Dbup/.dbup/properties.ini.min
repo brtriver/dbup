@@ -1,0 +1,4 @@
+;; pdo's constructor parameters
+;; see also http://jp1.php.net/manual/en/pdo.construct.php
+[pdo]
+dsn = "mysql:dbname=testdatabase;host=localhost"

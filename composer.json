@@ -23,7 +23,7 @@
         }
     ],
     "require": {
-        "php": ">=5.3.2",
+        "php": ">=5.4.0",
         "ext-pdo": "*",
         "symfony/console": "v2.2.1",
         "symfony/finder": "v2.2.1",

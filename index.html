@@ -41,9 +41,9 @@
               <ul>
                   <li>You have only to download <a href="https://raw.github.com/brtriver/dbup/master/dbup.phar">dbup.phar</a>.</li>
                   <li>Dbup has only <code>up</code> command. Dbup does not have <code>down</code> command.</li>
-                  <li>Dbup use just a plain old sql, so you don't have to learn ORM nor DSL. You write sql file and just call up command.</li>
-                  <li>Dbup use just PDO class to migrate.</li>
-                  <li>Dbup doesn't need the table of the migration status in a database to migrate.</li>
+                  <li>Dbup uses just a plain old sql, so you don't have to learn ORM nor DSL. You write sql file and just call up command.</li>
+                  <li>Dbup uses just PDO class to migrate.</li>
+                  <li>Dbup doesn't need the table of the migration status in a database to do up.</li>
               </ul>
 
               <h3>Requirements</h3>
@@ -69,9 +69,9 @@ $ php dbup.phar up
               <h3>Install</h3>
 
               <p>
-                  Installing Dbup is as easy as it can get. Download the dbup.phar and run init, then .dbup and sql directory are created and set a sample properties.ini file and sqlfile.
+                  Installing Dbup is as easy as it can get. Download the dbup.phar and run init, then <code>.dbup</code> and <code>sql</code> directory are created and set a sample <code>properties.ini</code> file and sql files.
               </p>
-<pre><code>php dbup.phar init
+<pre><code>$ php dbup.phar init
 </code></pre>
               <p>
                   change the database config in .dbup/properties.ini.
@@ -120,9 +120,35 @@ Up database after writing a new sql file.
 
               <p>that's all.</p>
 
+              <h3>How check status ?</h3>
+              
+              <p>
+              When you run <code>up</code> command, the sql file will be copied to <code>.dbup/applied</code> directory.
+              Dbup compares with <code>.dbup/applied</code> and <code>sql</code> directory whether the sql file has done or not.
+              If the same name files exist in both directories, <code>up</code> command ignores this file as being applied.
+              </p>
+              
+              <p>
+              In other words, If you copy the sql file to <code>.dbup/applied</code> directory manualy, this sql file is ignored.
+              And If you delete the sql from from <code>.dbup/applied</code> directory manualy, this sql file will be used agein.
+              </p>
+              
+              <h3>With git</h3>
+              
+              <p>
+                If you manage your project by git or want not to share applied statuses, you have to add <code>.dbap/applied/*</code> in <code>.gitignore</code>.
+              </p>
+              
               <h3>Developer</h3>
               <ul>
                   <li><a href="https://twitter.com/brtriver">@brtriver</a></li>
+              </ul>
+
+              <h3>Links</h3>
+              <ul>
+                <li><a href="https://github.com/brtriver/dbup">github</a></li>
+                <li><a href="https://travis-ci.org/brtriver/dbup">travis CI</a></li>
+                <li><a href="https://packagist.org/packages/brtriver/dbup">Packagist</a></li>
               </ul>
 
               <h3>License</h3>

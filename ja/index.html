@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Dbup - UPコマンドだけのPHP製シンプルマイグレーションツール</title>
+  </head>
+
+  <body>
+  <header>
+      <div class="inner">
+          <h1>Dbup</h1>
+          <a href="https://travis-ci.org/brtriver/dbup"><img src="https://travis-ci.org/brtriver/dbup.png"></a>
+
+          <h2>UPコマンドだけのマイグレーションツール</h2>
+          <a href="https://github.com/brtriver/dbup" class="button"><small>プロジェクトページ</small>GitHub</a>
+      </div>
+  </header>
+
+  <div id="content-wrapper">
+      <div class="inner clearfix">
+          <a href="./../index.html">English</a>
+      </div>
+      <div class="inner clearfix">
+          <section id="main-content">
+              <iframe src="http://player.vimeo.com/video/65262290" width="400" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
+              <h3>Dbup について</h3>
+
+              <p>Dbup はPHPで書かれたシンプルなマイグレーションツールです</p>
+              <ul>
+                  <li>準備は<a href="https://raw.github.com/brtriver/dbup/master/dbup.phar">dbup.phar</a>をダウンロードするだけ</li>
+                  <li><code>up</code> コマンドしかありません。<code>down</code> コマンドは存在しません</li>
+                  <li>マイグレーションの記述は親しみあるSQLそのままです。ORMやDSLを新しく覚える必要はありません</li>
+                  <li>PHP標準のPDODクラスを利用しています</li>
+                  <li>マイグレーションのステータス管理のためにデータベースに専用のテーブルを作る必要がありません</li>
+              </ul>
+
+              <h3>動作条件</h3>
+
+              <p>PHP 5.4.0 以降</p>
+
+              <h3>とりあえず動かしてみる</h3>
+<pre><code>// dbup.pharをダウンロードする
+$ cd your_repo_root/repo_name
+$ wget https://raw.github.com/brtriver/dbup/master/dbup.phar
+
+// dbupの初期化する
+$ php dbup.phar init
+$ vi .dbup/properties.ini
+
+// sqlファイルを用意して実行する
+$ vi sql/V1__sample_select.sql
+$ php dbup.phar status
+$ php dbup.phar up --dry-run
+$ php dbup.phar up
+</code></pre>
+
+              <h3>インストール</h3>
+
+              <p>
+                  Dbupのインストールは簡単。dbup.pharをダウンロードし<code>init</code>を実行するだけ。そうすると<code>.dbup</code> と <code>sql</code> ディレクトリが作成されます。 その中にサンプルの <code>properties.ini</code> と SQL ファイルがコピーされます。
+              </p>
+<pre><code>$ php dbup.phar init
+</code></pre>
+              <p>
+                あなたのDB環境を <code>.dbup/properties.ini</code> に書きましょう                  
+              </p>
+<pre><code>[pdo]
+dsn = "mysql:dbname=testdatabase;host=localhost"
+user = "testuser"
+password = "testpassword"
+php dbup.phar init
+</code></pre>
+              <p>
+                  PHPのPDOそのままです。詳しくは <a href="http://www.php.net/manual/ja/pdo.construct.php">PHP PDO document</a> を見てください
+              </p>
+
+              <h3>マイグレーションファイルの命名規則</h3>
+
+              <p>マイグレーションのファイルは以下のルールで作成してください:</p>
+
+              <pre><code>V[バージョン番号]__[名前].sql</code></pre>
+              <p>V はプレフィックスです。 バージョン番号と名前のセパレータは __ (2つの連続するアンダーバー)です。拡張子は .sqlです。</p>
+
+              <h3>利用方法</h3>
+              <p>コマンド一覧を見る</p>
+
+              <pre><code>$ php dbup.phar</code></pre>
+
+              <p>ステータス表示しマイグレーションの状況を確認する</p>
+
+              <pre><code>$ php dbup.phar status</code></pre>
+
+<pre><code>dbup migration status
+================================================================================
+Applied At | migration sql file
+--------------------------------------------------------------------------------
+2013-05-01 22:37:32 | V1__sample_select.sql
+appending... | V2__sample.sql
+appending... | V3__sample.sql
+appending... | V20__sample.sql
+appending... | V100__sample.sql
+
+</code></pre>
+
+<p>SQLファイルを書いて実行する</p>
+
+              <pre><code>$ php dbup.phar up</code></pre>
+
+              <p>これだけです。</p>
+
+              <h3>どうやってステータスをチェックしてるの ?</h3>
+              
+              <p>
+              When you run <code>up</code> command, the sql file will be copied to <code>.dbup/applied</code> directory.
+              Dbup compares with <code>.dbup/applied</code> and <code>sql</code> directory whether the sql file has done or not.
+              If the same name files exist in both directories, <code>up</code> command ignores this file as being applied.
+              </p>
+              
+              <p>
+              In other words, If you copy the sql file to <code>.dbup/applied</code> directory manualy, this sql file is ignored.
+              And If you delete the sql from from <code>.dbup/applied</code> directory manualy, this sql file will be used agein.
+              </p>
+              
+              <h3>git環境での利用時の注意</h3>
+              
+              <p>
+                If you manage your project by git or want not to share applied statuses, you have to add <code>.dbap/applied/*</code> in <code>.gitignore</code>.
+              </p>
+              
+              <h3>開発者</h3>
+              <ul>
+                  <li><a href="https://twitter.com/brtriver">@brtriver</a></li>
+              </ul>
+
+              <h3>Links</h3>
+              <ul>
+                <li><a href="https://github.com/brtriver/dbup">github</a></li>
+                <li><a href="https://travis-ci.org/brtriver/dbup">travis CI</a></li>
+                <li><a href="https://packagist.org/packages/brtriver/dbup">Packagist</a></li>
+              </ul>
+
+              <h3>License</h3>
+              <p>Dbup is licensed under the MIT license.</p>
+
+       </section>
+
+        <aside id="sidebar">
+          <a href="https://raw.github.com/brtriver/dbup/master/dbup.phar" class="button">
+            <small>Download</small>
+            dbup.phar file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/brtriver/dbup"></a> is maintained by <a href="https://github.com/brtriver">brtriver</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-40597905-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>

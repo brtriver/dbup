@@ -123,20 +123,19 @@ appending... | V100__sample.sql
               <h3>どうやってステータスをチェックしてるの ?</h3>
               
               <p>
-              When you run <code>up</code> command, the sql file will be copied to <code>.dbup/applied</code> directory.
-              Dbup compares with <code>.dbup/applied</code> and <code>sql</code> directory whether the sql file has done or not.
-              If the same name files exist in both directories, <code>up</code> command ignores this file as being applied.
+              <code>up</code>コマンドを実行したとき、Dbupは<code>.dbup/applied</code>ディレクトリに実行したSQLファイルをコピーします。
+              そして、<code>up</code>コマンドは実行する前に、<code>sql</code>と<code>.dbup/applied</code>のディレクトリのファイルをチェックして両方に同名のファイルが存在しているときは実行済みとして無視します。
               </p>
               
               <p>
-              In other words, If you copy the sql file to <code>.dbup/applied</code> directory manualy, this sql file is ignored.
-              And If you delete the sql from from <code>.dbup/applied</code> directory manualy, this sql file will be used agein.
+              言い換えると、手動で<code>.dbup/applied</code>にSQLファイルをコピーすると、そのSQLファイルは実行されなくなります。
+              また、<code>.dbup/applied</code>からファイルを削除すると、そのSQLファイルは<code>up</code>時に再度利用されるようになります。
               </p>
               
               <h3>git環境での利用時の注意</h3>
               
               <p>
-                If you manage your project by git or want not to share applied statuses, you have to add <code>.dbap/applied/*</code> in <code>.gitignore</code>.
+              gitでプロジェクトを管理していたり、ステータスを開発者内で共有しているときは <code>.dbup/applied/*</code>を <code>.gitignore</code>に設定する必要があるでしょう。
               </p>
               
               <h3>開発者</h3>
@@ -158,7 +157,7 @@ appending... | V100__sample.sql
 
         <aside id="sidebar">
           <a href="https://raw.github.com/brtriver/dbup/master/dbup.phar" class="button">
-            <small>Download</small>
+            <small>ダウンロードする</small>
             dbup.phar file
           </a>
 

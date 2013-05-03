@@ -1,5 +1,8 @@
 PHP_BIN=$(shell which php)
 CURL_BIN=$(shell which curl)
+SINCE=v0.1
+UNTIL=HEAD
+
 PHPUNIT=phpunit.phar
 
 all:test
@@ -19,3 +22,6 @@ testrunner:
 
 compile:
 	$(PHP_BIN) dbup compile
+
+changelog:
+	git log --pretty=format:" * %h %s" $(SINCE)..$(UNTIL) -- src tests

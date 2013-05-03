@@ -59,7 +59,7 @@ EOL;
     protected function getFiles()
     {
         $finder = new Finder();
-        $srcIterator = $finder->files()->exclude('Tests')->name('*.php')->in(array('vendor', 'src'));
+        $srcIterator = $finder->files()->exclude('tests')->name('*.php')->in(array('vendor', 'src'));
 
         return iterator_to_array($srcIterator);
     }

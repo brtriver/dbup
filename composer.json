@@ -28,8 +28,6 @@
         "symfony/console": "v2.2.1",
         "symfony/finder": "v2.2.1",
         "phake/phake": "v1.0.3",
-        "piece/stagehand-testrunner": "v3.6.1",
-        "phpunit/phpunit": "v3.7.19",
         "hamcrest/hamcrest": "1.1.0"
     },
     "suggest": {

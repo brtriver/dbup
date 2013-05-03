@@ -1,18 +1,21 @@
 PHP_BIN=$(shell which php)
-PHPUNIT=vendor/bin/phpunit
-TESTRUNNER=vendor/bin/testrunner
+CURL_BIN=$(shell which curl)
+PHPUNIT=phpunit.phar
 
 all:test
 
+setup:
+	$(PHP_BIN) -r "eval('?>'.file_get_contents('https://getcomposer.org/installer'));"
+	$(CURL_BIN) -SsLO http://pear.phpunit.de/get/phpunit.phar
+
 install:
 	$(PHP_BIN) composer.phar install
-	$(TESTRUNNER) "compile" --preload-script vendor/autoload.php
 
 test:
-	$(PHPUNIT) --tap --colors ./tests
+	$(PHP_BIN) $(PHPUNIT) --tap --colors ./tests
 
 testrunner:
-	$(TESTRUNNER) "phpunit"  --preload-script ./vendor/autoload.php  --phpunit-config ./phpunit.xml --autotest ./tests ./src
+	guard -i
 
 compile:
 	$(PHP_BIN) dbup compile

@@ -124,6 +124,16 @@ aside#sidebar p.repo-owner a {
   font-weight: bold;
 }
 
+aside#sidebar h2 {
+  padding: 6px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  color: #fff;
+  background-color: #2268B2;
+}
+
 #downloads {
   margin-bottom: 40px;
 }

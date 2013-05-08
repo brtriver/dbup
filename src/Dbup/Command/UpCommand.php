@@ -83,7 +83,7 @@ If you run with <info>--dry-run</info>, this command displays to be applied sql 
         $app->setConfigFromIni($ini);
         if ($fileName = $input->getArgument('file')) {
             $file = $app->getSqlFileByName($fileName);
-            $output->writeln('<info>applied specific sql file :</info>' . $file->getFileName());
+            $output->writeln('<info>applying specific sql file ... :</info>' . $file->getFileName());
             if (!$isDryRun) {
                 $app->up($file);
             }
@@ -105,8 +105,12 @@ EOL
     protected function upAllUnAppliedFiles($app, OutputInterface $output, $isDryRun)
     {
         $statuses = $app->getUpCandidates();
+
+        $progress = $app->getHelperSet()->get('progress');
+        $progress->start($output, count($statuses));
+
         foreach ($statuses as $status) {
-            $output->writeln('<info>applied :</info>' . $status->file->getFileName());
+            $output->writeln('<info>applying... :</info>' .  $status->file->getFileName());
             if (!$isDryRun) {
                 $app->up($status->file);
             }
@@ -116,7 +120,11 @@ EOL
 $sql
 EOL
             );
+            $progress->advance();
+            $output->writeln(PHP_EOL);
         }
+
+        $progress->finish();
 
     }
 }

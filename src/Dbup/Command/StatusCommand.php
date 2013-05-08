@@ -58,21 +58,20 @@ dbup checks whether sql files were applied or not by comparing the file names in
 
         $statuses = $app->getStatuses();
 
-        $format = "%20s | %s";
+        $output->writeln('<info>dbup migration status</info>');
 
-        $lines[] = '<info>dbup migration status</info>';
-        $lines[] = str_repeat('=', 80);
-        $lines[] = sprintf($format, "Applied At", "migration sql file");
-        $lines[] = str_repeat('-', 80);
-
+        $rows = [];
         foreach($statuses as $status){
             $appliedAt = $status->appliedAt === '' ? "appending...": $status->appliedAt;
-            $lines[] = sprintf($format, $appliedAt, $status->file->getFileName());
+            $rows[] = [$appliedAt, $status->file->getFileName()];
         }
 
-        foreach($lines as $line){
-            $output->writeln($line);
-        }
+        $table = $app->getHelperSet()->get('table');
+        $table
+            ->setHeaders(['Applied At', 'Migration Sql File'])
+            ->setRows($rows)
+        ;
+        $table->render($output);
 
     }
 }

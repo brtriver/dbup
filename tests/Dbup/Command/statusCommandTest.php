@@ -18,7 +18,7 @@ class StatusCommandTest extends \PHPUnit_Framework_TestCase
                 '--ini' => __DIR__ . '/../.dbup/properties.ini.test',
             ]);
 
-        assertThat($commandTester->getDisplay(), is(containsString('appending... | V12__sample12_select.sql')));
+        assertThat($commandTester->getDisplay(), is(containsString('| appending...        | V12__sample12_select.sql |')));
     }
 
     /**

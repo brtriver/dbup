@@ -31,6 +31,21 @@ Class ApplicationTest extends \PHPUnit_Framework_TestCase
         assertThat($this->app->getIni(), is('./.dbup/properties.ini'));
     }
 
+    public function testParseIniFileReplaceVariables()
+    {
+        $_SERVER['DBUP_TEST_DBMS'] = 'replaced_dbms';
+        $_SERVER['DBUP_TEST_USER'] = 'replaced_user';
+        $_SERVER['DBUP_TEST_HOST'] = 'replaced_host';
+        $_SERVER['OTHER_PREFIX_DBUP_TEST_PASSWORD'] = 'replaced_password';
+
+        $ini = __DIR__ . '/.dbup/properties.ini.replace';
+        $parsed = $this->app->parseIniFile($ini)['pdo'];
+
+        assertThat($parsed['dsn'], is('replaced_dbms:dbname=replaced_user_replaced_host_%%DBUP_TEST_NOT_REPLACED%%;host=replaced_host'));
+        assertThat($parsed['user'], is('%DBUP_TEST_USER%'));
+        assertThat($parsed['password'], is('%%OTHER_PREFIX_DBUP_TEST_PASSWORD%%'));
+    }
+
     public function testSetConfigFromIni()
     {
         $ini = __DIR__ . '/.dbup/properties.ini';

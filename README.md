@@ -38,6 +38,11 @@ change the database config in `.dbup/properties.ini`.
 
 see also http://www.php.net/manual/en/pdo.construct.php
 
+You can also assign environment variables to your database configuration file. Dbup reads `DBUP_` prefixed environment variables if the names are placed in .ini file with surrounded '%%'. For example, `user` parameter of the following ini will be replaced to a value of the environment variable `DBUP_USERNAME` if it is defined.
+
+    [pdo]
+    user = "%%DBUP_USERNAME%%"
+
 Naming
 ------
 

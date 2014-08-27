@@ -1,0 +1,4 @@
+[pdo]
+dsn = "%%DBUP_TEST_DBMS%%:dbname=%%DBUP_TEST_USER%%_%%DBUP_TEST_HOST%%_%%DBUP_TEST_NOT_REPLACED%%;host=%%DBUP_TEST_HOST%%"
+user = "%DBUP_TEST_USER%"
+password = "%%OTHER_PREFIX_DBUP_TEST_PASSWORD%%"

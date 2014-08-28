@@ -2,7 +2,25 @@
 <?php
 // bin/dbup
 
-require_once __DIR__ . '/vendor/autoload.php';
+$candidateAutoloaders = [
+    __DIR__ . '/vendor/autoload.php',  // This file is placed on the Dbup root
+    __DIR__ . '/../../autoload.php',  // This file is placed on the vendor/brtriver/dbup by Composer (symlinked)
+    __DIR__ . '/../autoload.php',  // This file is placed on the vendor/bin by Composer (hard-copied)
+];
+
+$autoloaderPath = '';
+foreach ($candidateAutoloaders as $candidate) {
+    if (is_file($candidate)) {
+        $autoloaderPath = $candidate;
+        break;
+    }
+}
+
+if (!$autoloaderPath) {
+    trigger_error('Any autoloaders cannot be detected', E_USER_ERROR);
+}
+
+require_once $autoloaderPath;
 
 $application = new \Dbup\Application();
 $application->add(new \Dbup\Command\InitCommand);

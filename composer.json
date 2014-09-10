@@ -46,5 +46,5 @@
     "autoload": {
         "psr-0": { "Dbup": "src/" }
     },
-    "bin": ["bin/dbup"]
+    "bin": ["dbup"]
 }

@@ -25,9 +25,9 @@
     "require": {
         "php": ">=5.4.0",
         "ext-pdo": "*",
-        "symfony/console": "v2.3.0-BETA1",
-        "symfony/finder": "v2.3.0-BETA1",
-        "symfony/event-dispatcher": "v2.3.0-BETA1",
+        "symfony/console": "v2.3.0",
+        "symfony/finder": "v2.3.0",
+        "symfony/event-dispatcher": "v2.3.0",
         "phake/phake": "v1.0.3",
         "hamcrest/hamcrest": "1.1.0"
     },

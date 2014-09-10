@@ -67,9 +67,20 @@ EOL;
         $this->pdo = new PdoDatabase($dsn, $user, $password, $driverOptions);
     }
 
-    public function setConfigFromIni($ini)
+    public function parseIniFile($path)
     {
-        $parse = parse_ini_file($ini, true);
+        $ini = file_get_contents($path);
+        $replaced = preg_replace_callback('/%%(DBUP_[^%]+)%%/', function ($matches) {
+            list($whole, $key) = $matches;
+            return isset($_SERVER[$key]) ? $_SERVER[$key] : $whole;
+        }, $ini);
+
+        return parse_ini_string($replaced, true);
+    }
+
+    public function setConfigFromIni($path)
+    {
+        $parse = $this->parseIniFile($path);
         if (!isset($parse['pdo'])) {
             throw new RuntimeException('cannot find [pdo] section in your properties.ini');
         }

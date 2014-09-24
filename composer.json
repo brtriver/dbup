@@ -4,24 +4,6 @@
     "keywords": ["migration", "database"],
     "homepage": "http://1ms.jp/",
     "type": "library",
-    "repositories": [
-        {
-            "type": "package",
-            "package": {
-                "name": "hamcrest/hamcrest",
-                "version": "1.1.0",
-                "dist": {
-                    "type": "zip",
-                    "url": "https://hamcrest.googlecode.com/files/hamcrest-php-1.1.0.zip"
-                },
-                "include-path": ["Hamcrest-1.1.0/"],
-                "autoload": {
-                    "psr-0": { "Hamcrest_": "Hamcrest-1.1.0/" },
-                    "files": ["Hamcrest-1.1.0/Hamcrest/Hamcrest.php"]
-                }
-            }
-        }
-    ],
     "require": {
         "php": ">=5.4.0",
         "ext-pdo": "*",
@@ -29,7 +11,8 @@
         "symfony/finder": "v2.3.0",
         "symfony/event-dispatcher": "v2.3.0",
         "phake/phake": "v1.0.3",
-        "hamcrest/hamcrest": "1.1.0"
+        "hamcrest/hamcrest-php": "1.2.0",
+        "phpunit/phpunit": "4.2.*"
     },
     "suggest": {
         "ext-pdo-mysql": "In order to use ikou with MySQL databases.",

@@ -7,9 +7,9 @@
     "require": {
         "php": ">=5.4.0",
         "ext-pdo": "*",
-        "symfony/console": "v2.3.0",
-        "symfony/finder": "v2.3.0",
-        "symfony/event-dispatcher": "v2.3.0",
+        "symfony/console": "~2.5.0",
+        "symfony/finder": "~2.5.0",
+        "symfony/event-dispatcher": "~2.5.0",
         "phake/phake": "v1.0.3",
         "hamcrest/hamcrest-php": "1.2.0",
         "phpunit/phpunit": "4.2.*"

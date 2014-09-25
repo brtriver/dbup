@@ -27,4 +27,5 @@ $application->add(new \Dbup\Command\InitCommand);
 $application->add(new \Dbup\Command\StatusCommand);
 $application->add(new \Dbup\Command\UpCommand);
 $application->add(new \Dbup\Command\CompileCommand);
+$application->add(new \Dbup\Command\CreateCommand);
 $application->run();

@@ -6,6 +6,7 @@ use Dbup\Exception\RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCommand extends Command
@@ -16,7 +17,14 @@ class CreateCommand extends Command
         $this->setName('create')
             ->setDescription('Create a migration')
             ->addArgument('name', InputArgument::REQUIRED, 'Description of migration.')
-            ->addOption('ini');
+            ->addOption('ini', null, InputOption::VALUE_NONE)
+            ->setHelp('
+The <info>dbup up</info> command create empty migration timestamped with name.
+
+<info>$ php dbup create my_migration</info>
+
+Create migration/file in the <info>./sql</info> directory with name <info>VYYYYMMDDHHMMSS__my_migration.sql</info>
+            ');
     }
 
     protected function execute (InputInterface $input, OutputInterface $output)

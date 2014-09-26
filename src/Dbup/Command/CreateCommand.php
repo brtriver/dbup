@@ -44,7 +44,7 @@ Create migration/file in the <info>./sql</info> directory with name <info>VYYYYM
         $name = $input->getArgument('name');
         $sqlPath = $app->sqlFilesDir;
 
-        $version = date("YmjHis");
+        $version = date("YmdHis");
         $fileName = $sqlPath . "/" . "V{$version}" . "__{$name}.sql";
 
         $saved = file_put_contents($fileName, "");

@@ -17,7 +17,7 @@ class CreateCommand extends Command
         $this->setName('create')
             ->setDescription('Create a migration')
             ->addArgument('name', InputArgument::REQUIRED, 'Description of migration.')
-            ->addOption('ini', null, InputOption::VALUE_NONE)
+            ->addOption('ini', null, InputOption::VALUE_OPTIONAL)
             ->setHelp('
 The <info>dbup up</info> command create empty migration timestamped with name.
 

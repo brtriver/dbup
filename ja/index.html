@@ -39,7 +39,7 @@
 
               <p>Dbup はPHPで書かれたシンプルなマイグレーションツールです</p>
               <ul>
-                  <li>準備は<a href="https://raw.github.com/brtriver/dbup/master/dbup.phar">dbup.phar</a>をダウンロードするだけ</li>
+                  <li>準備は<a href="https://github.com/brtriver/dbup/raw/master/dbup.phar">dbup.phar</a>をダウンロードするだけ</li>
                   <li><code>up</code> コマンドしかありません。<code>down</code> コマンドは存在しません</li>
                   <li>マイグレーションの記述は親しみあるSQLそのままです。ORMやDSLを新しく覚える必要はありません</li>
                   <li>PHP標準のPDOクラスを利用しています</li>
@@ -61,7 +61,7 @@
               <h3>とりあえず動かしてみる</h3>
 <pre><code>// dbup.pharをダウンロードする
 $ cd your_repo_root/repo_name
-$ wget https://raw.github.com/brtriver/dbup/master/dbup.phar
+$ wget https://github.com/brtriver/dbup/raw/master/dbup.phar
 
 // dbupの初期化する
 $ php dbup.phar init
@@ -93,12 +93,20 @@ password = "testpassword"
                   PHPのPDOそのままです。詳しくは <a href="http://www.php.net/manual/ja/pdo.construct.php">PHP PDO document</a> を見てください
               </p>
 
+	      <p>また、環境変数をデータベースの設定ファイルで利用することができます。Dbup は iniファイル内に '%%' で囲まれた <code>DBUP_</code> の接頭辞の環境変数を読み込むことができます。たとえば、次のように定義されていれば、<code>user</code> パラメータは <code>DBUP_USERNAME</code> の環境変数の内容に置き換えられます。</p>
+
+<pre><code>[pdo]
+user = "%%DBUP_USERNAME%%"
+</code></pre>
+
               <h3>マイグレーションファイルの命名規則</h3>
 
               <p>マイグレーションのファイルは以下のルールで作成してください:</p>
 
               <pre><code>V[バージョン番号]__[名前].sql</code></pre>
               <p>V はプレフィックスです。 バージョン番号と名前のセパレータは __ (2つの連続するアンダーバー)です。拡張子は .sqlです。</p>
+
+	      <p>まずは、<code>$ php dbup.phar create scriptname</code> を叩いてみてください。このコマンドは空のマイグレーションファイルを作成してくれます。</p>
 
               <h3>利用方法</h3>
               <p>コマンド一覧を見る</p>
@@ -168,15 +176,15 @@ appending... | V100__sample.sql
        </section>
 
         <aside id="sidebar">
-          <a href="https://raw.github.com/brtriver/dbup/master/dbup.phar" class="button">
+          <a href="https://github.com/brtriver/dbup/raw/master/dbup.phar" class="button">
             <small>ダウンロードする</small>
             dbup.phar file
           </a>
 
 	  <h2>最新バージョン</h2>
 	  <p>
-	    <a href="https://raw.github.com/brtriver/dbup/master/dbup.phar">
-	      <span style="font-size: 1.4em;">v0.4 (2013-05-09)</span>
+	    <a href="https://github.com/brtriver/dbup/raw/master/dbup.phar">
+	      <span style="font-size: 1.4em;">v0.5 (2014-10-07)</span>
 	    </a>
 	    <a href="https://github.com/brtriver/dbup/blob/master/CHANGELOG.md">[更新履歴]</a>
 	  </p>

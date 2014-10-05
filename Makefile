@@ -9,7 +9,7 @@ all:test
 
 setup:
 	$(PHP_BIN) -r "eval('?>'.file_get_contents('https://getcomposer.org/installer'));"
-	$(CURL_BIN) -SsLO http://pear.phpunit.de/get/phpunit.phar
+	$(CURL_BIN) -SsLO https://phar.phpunit.de/phpunit.phar
 
 install:
 	$(PHP_BIN) composer.phar install

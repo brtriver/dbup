@@ -39,7 +39,7 @@
 
               <p>Dbup is a simple migration tool that is written by PHP.</p>
               <ul>
-                  <li>You have only to download <a href="https://raw.github.com/brtriver/dbup/master/dbup.phar">dbup.phar</a>.</li>
+                  <li>You have only to download <a href="https://github.com/brtriver/dbup/raw/master/dbup.phar">dbup.phar</a>.</li>
                   <li>Dbup has only <code>up</code> command. Dbup does not have <code>down</code> command.</li>
                   <li>Dbup uses just a plain old sql, so you don't have to learn ORM nor DSL. You write sql file and just call up command.</li>
                   <li>Dbup uses just PDO class to migrate.</li>
@@ -61,7 +61,7 @@
               <h3>Quick Install and Run</h3>
 <pre><code>// if you want to get from CLI
 $ cd your_repo_root/repo_name
-$ wget https://raw.github.com/brtriver/dbup/master/dbup.phar
+$ wget https://github.com/brtriver/dbup/raw/master/dbup.phar
 
 // initialize dbup
 $ php dbup.phar init
@@ -93,12 +93,20 @@ password = "testpassword"
                   see also <a href="http://www.php.net/manual/en/pdo.construct.php">PHP PDO document</a>
               </p>
 
+	      <p>You can also assign environment variables to your database configuration file. Dbup reads <code>DBUP_</code> prefixed environment variables if the names are placed in .ini file with surrounded '%%'. For example, <code>user</code> parameter of the following ini will be replaced to a value of the environment variable <code>DBUP_USERNAME</code> if it is defined.</p>
+
+<pre><code>[pdo]
+user = "%%DBUP_USERNAME%%"
+</code></pre>
+
+
               <h3>Naming for migration sql files</h3>
 
               <p>You have to name a sql file like below:</p>
 
               <pre><code>V[version_number]__[description].sql</code></pre>
               <p>V is prefix. the separator is __ (two underscores). Suffix is .sql</p>
+              <p>You have to do <code>$ php dbup.phar create scriptname</code>. This comamnd create an empty new sql file.</p>
 
               <h3>Usage</h3>
               <p>List all commands.</p>
@@ -177,8 +185,8 @@ appending... | V100__sample.sql
 
 	  <h2>Latest Version</h2>
 	  <p>
-	    <a href="https://raw.github.com/brtriver/dbup/master/dbup.phar">
-	      <span style="font-size: 1.4em;">v0.4 (2013-05-09)</span>
+	    <a href="https://github.com/brtriver/dbup/raw/master/dbup.phar">
+	      <span style="font-size: 1.4em;">v0.5 (2014-10-07)</span>
 	    </a>
 	    <a href="https://github.com/brtriver/dbup/blob/master/CHANGELOG.md">[changelog]</a>
 	  </p>

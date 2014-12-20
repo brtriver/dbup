@@ -4,6 +4,7 @@
 /.idea/*
 /.DS_Store
 /phpunit.phar
+/box.phar
 /composer.phar
 /php-cs-fixer.phar
 /phpunit.xml

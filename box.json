@@ -1,0 +1,16 @@
+{
+    "output": "dbup.phar",
+    "chmod": "0755",
+    "extract": false,
+    "files": [
+        "LICENCE"
+    ],
+    "finder": [
+        {
+            "name": ["*.php"],
+            "exclude": ["Tests", "tests"],
+            "in": ["vendor", "src"]
+        }
+    ],
+    "stub": "src/Dbup/Resources/phar-stub.php"
+}
